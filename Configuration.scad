@@ -391,7 +391,8 @@ cover_sphere_diameter = 12.5 + 0.1;
 
 
 // Peg
-peg_length = 12;
+// peg_length = 12;
+peg_length = 12 - 2;
 peg_diameter = 3.8 + 0.2; // (0.2mm tolerance added to exact measurement)
 
 
