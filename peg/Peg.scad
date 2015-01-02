@@ -23,7 +23,9 @@ module build_peg(){
 	
 	color([0.4,0.4,0.4])
 	translate([0,0,peg_length/2])
-		cylinder(h=peg_length, d2=peg_diameter-tol, d1=peg_diameter-(tol*2), center=true);
+	rotate([0,180,0])
+// 		cylinder(h=peg_length, d2=peg_diameter-tol, d1=peg_diameter-(tol*2), center=true);
+		cylinder(h=peg_length, d2=peg_diameter, d1=peg_diameter - tol, center=true);
 	
 	
 }
