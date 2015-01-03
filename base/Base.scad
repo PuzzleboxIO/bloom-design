@@ -9,7 +9,7 @@
 // License: Creative Commons - Attribution - Share Alike
 //          https://creativecommons.org/licenses/by-sa/3.0
 //
-// source credit: "Blooming Lamp" by emmett [https://www.thingiverse.com/thing:37926]
+// source credit: "Blossoming Lamp" by emmett [https://www.thingiverse.com/thing:37926]
 
 
 // Modules
