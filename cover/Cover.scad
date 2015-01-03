@@ -6,7 +6,7 @@
 // by Puzzlebox Productions, LLC
 // http://puzzlebox.io/bloom
 //
-// Copyright Puzzlebox Productions, LLC (2014)
+// Copyright Puzzlebox Productions, LLC (2014-2015)
 //
 // License: Creative Commons - Attribution - Share Alike
 //          https://creativecommons.org/licenses/by-sa/3.0
@@ -17,9 +17,9 @@
 module assemble_cover() {
 	
 	// Draft - Mockup Screw
-	mockup_cover_screw();
+	// 	mockup_cover_screw();
 	
-	// 	rotate([0,-90,0])
+	rotate([0,-90,0])
 	difference(){
 		cover();
 		
