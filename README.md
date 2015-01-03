@@ -7,6 +7,11 @@ Puzzlebox Bloom - 3D Design
 by Puzzlebox Productions, LLC
 http://puzzlebox.io/bloom
 
+
+Assembly Guide:
+https://puzzlebox.io/bloom-assembly/
+
+
 License: Creative Commons - Attribution - Share Alike
          https://creativecommons.org/licenses/by-sa/3.0
 
