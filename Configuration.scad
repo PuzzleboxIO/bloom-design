@@ -27,7 +27,8 @@ print_scale = 0.8; // divide by this number pricely-measured
 
 
 // Tolerances
-tol=0.4 / print_scale; // tolerance for sliding [MakerBot Replicator 2]
+tol=0.45 / print_scale; // tolerance for sliding [MakerBot Replicator 2]
+// tol=0.4 / print_scale; // tolerance for sliding [MakerBot Replicator 2]
 // tol=0.3 / print_scale; // tolerance for sliding [Ultimaker 2]
 // tol=0.4 / print_scale; // tolerance for sliding [daVinci 1.0]
 
