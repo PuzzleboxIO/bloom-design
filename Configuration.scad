@@ -27,7 +27,7 @@ print_scale = 0.8; // divide by this number pricely-measured
 
 
 // Tolerances
-tol=0.45 / print_scale; // tolerance for sliding [MakerBot Replicator 2]
+tol=0.45 / print_scale; // tolerance for sliding [Printrbot Simple Metal (2014, 2015)]
 // tol=0.4 / print_scale; // tolerance for sliding [MakerBot Replicator 2]
 // tol=0.3 / print_scale; // tolerance for sliding [Ultimaker 2]
 // tol=0.4 / print_scale; // tolerance for sliding [daVinci 1.0]
@@ -437,6 +437,7 @@ enable_bulb_platform = false;
 // bulb_pivots_tapered = false; // set to true when bulb_platform enabled
 bulb_pivots_tapered = true;
 
+
 // Lens
 
 enable_platform_lens = true;
@@ -456,9 +457,16 @@ lens_resolution=30;
 
 // Bulb
 
+// bulb_enable_support_stand = false; // Ultimaker 2
+bulb_enable_support_stand = true; // Printrbot Simple Metal
+// bulb_support_stand_height = 3;
+bulb_support_stand_height = 2;
+bulb_support_stand_width = 8;
+bulb_support_stand_length = 40;
+
 // bulb_wall_thickness_interior = 3.2 / print_scale; // ~3 walls @ shell thickness 1.2 (0.8 scale)
-// bulb_wall_thickness_interior = 2.4 / print_scale; // ~2 walls @ shell thickness 1.2 (0.8 scale)
-bulb_wall_thickness_interior = 1.6 / print_scale;    // ~1 walls @ shell thickness 1.2 (0.8 scale)
+bulb_wall_thickness_interior = 2.4 / print_scale; // ~2 walls @ shell thickness 1.2 (0.8 scale) [Printrbot Simple Metal (2014, 2015)]
+// bulb_wall_thickness_interior = 1.6 / print_scale; // ~1 walls @ shell thickness 1.2 (0.8 scale) [Ultimaker 2]
 
 bulb_wall_thickness = (3.2 * 3) / print_scale;
 // bulb_socket_gap = 2; // 1mm all around * print_scale;
