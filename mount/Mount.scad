@@ -116,11 +116,13 @@ module mount_tapped_stand(r=mountingHoleRadius+0.2){
 		cylinder( h=pcbHeight + 3 + 1.02, r = r );
 		
 		// Installation gutter
-		translate([40.75,66.04,pcbHeight/2]){
-			cube([10,r*2,pcbHeight * 2], center=true);
-			
-			translate([-5,0,0])
-			cylinder(,h=pcbHeight+0.02, d=r*2, center=true);
+		if (microcontroller_mount_crop_installation_gutter) {
+			translate([40.75,66.04,pcbHeight/2]){
+				cube([10,r*2,pcbHeight * 2], center=true);
+				
+				translate([-5,0,0])
+				cylinder(,h=pcbHeight+0.02, d=r*2, center=true);
+			}
 		}
 	}
 	

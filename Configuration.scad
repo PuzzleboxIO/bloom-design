@@ -271,6 +271,12 @@ microcontroller_mount_y_offset = -40 + 7 - 4;
 microcontroller_mount_z_offset = 20;
 // microcontroller_mount_z_offset = 15 + microcontroller_bolt_width + 5;
 
+// microcontroller_mounting_hole_radius_adjustment = 0.25;
+microcontroller_mounting_hole_radius_adjustment = 0;
+
+// microcontroller_mount_crop_installation_gutter = true;
+microcontroller_mount_crop_installation_gutter = false;
+
 microusb_crop_width = 12;
 microusb_crop_height = 80;
 microusb_crop_depth = 10;

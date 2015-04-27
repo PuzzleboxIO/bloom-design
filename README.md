@@ -13,7 +13,7 @@ https://puzzlebox.io/bloom-assembly/
 
 
 License: Creative Commons - Attribution - Share Alike
-         https://creativecommons.org/licenses/by-sa/3.0
+https://creativecommons.org/licenses/by-sa/3.0
 
 source credit: "Blossoming Lamp" by Emmett Lalish [https://www.thingiverse.com/thing:37926]
 source credit: "Arduino OpenSCAD mounting library (v2.0)" by Kelly Egan [https://github.com/kellyegan/OpenSCAD-Arduino-Mounting-Library]

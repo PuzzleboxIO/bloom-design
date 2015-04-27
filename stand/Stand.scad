@@ -135,7 +135,8 @@ module build_stand_extruded_interior() {
 			rotate([0,0,180])
 			// 			mount_tapped();
 			// 			mount_tapped_extended(r = mountingHoleRadius+0.25);
-			mount_tapped_stand(r = mountingHoleRadius+0.25);
+// 			mount_tapped_stand(r = mountingHoleRadius+0.25);
+			mount_tapped_stand(r = mountingHoleRadius + microcontroller_mounting_hole_radius_adjustment);
 			
 			
 			rotate(microcontroller_rotate_position)			
@@ -174,7 +175,8 @@ module build_stand_extruded_interior() {
 		rotate([0,0,180])
 		holePlacement(boardType = LEONARDO)
 		translate([0, 0, -0.01])
-		cylinder( h=pcbHeight + 3 + 1.02, r = mountingHoleRadius+0.25 );
+// 		cylinder( h=pcbHeight + 3 + 1.02, r = mountingHoleRadius+0.25 );
+		cylinder( h=pcbHeight + 3 + 1.02, r = mountingHoleRadius+microcontroller_mounting_hole_radius_adjustment );
 		
 		
 		// Slice microcontroller mounting board down the middle to save material
