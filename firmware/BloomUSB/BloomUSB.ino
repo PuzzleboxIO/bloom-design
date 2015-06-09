@@ -2,9 +2,9 @@
  * 
  * Puzzlebox - Bloom
  * 
- * Bloom RGB / Servo / Bluetooth LE Sketch
+ * Bloom RGB / Servo Sketch
  * 
- * Copyright Puzzlebox Productions, LLC (2014-2015)
+ * Copyright Puzzlebox Productions, LLC (2014)
  * 
  * This code is released under the GNU Pulic License (GPL) version 3
  * 
@@ -22,41 +22,25 @@
  * 
  * Original Author: Steve Castellotti <sc@puzzlebox.io>
  * 
- * Modified 2015-02-05
+ * Modified 2014-12-30
  * by Steve Castellotti <sc@puzzlebox.io>
  * 
  */
 
 #include <Servo.h>
-#include <SPI.h>
-#include <RBL_nRF8001.h>
-#include <boards.h>
 
-#define DEBUG_OUTPUT 1 // 1 for debug
-// #define DEBUG_BLE_PACKETS 1 // 1 for debug
-#define DEBUG_BLE_PACKETS 0 // 1 for debug
-
-#define ENABLE_BLE 1
+#define DEBUG_OUTPUT 0 
+//#define DEBUG_OUTPUT 1 // 1 for debug
 
 #define SERVO_PIN_BLOOM 7
-
-
-
-#define DIGITAL_OUT_PIN    2
-#define DIGITAL_IN_PIN     A4
-#define PWM_PIN            3
-//#define SERVO_PIN          5
-#define SERVO_PIN          7
-#define ANALOG_IN_PIN      A5
-
 
 #define RGB_PIN_RED 3
 #define RGB_PIN_GREEN 5
 #define RGB_PIN_BLUE 6
 
 // Counter-clockwise Open
-#define POSITION_BLOOM_OPEN 50
-#define POSITION_BLOOM_CLOSED 135
+#define POSITION_BLOOM_OPEN 31
+#define POSITION_BLOOM_CLOSED 150
 
 // Clockwise Open
 //#define POSITION_BLOOM_OPEN 150
@@ -64,18 +48,11 @@
 
 #define POSITION_BLOOM_SETUP 70 // Percentage
 
-// #define POSITION_BLOOM_OPEN 54 // Wood
-// #define POSITION_BLOOM_CLOSED 144 // Wood
-// #define POSITION_BLOOM_SETUP 100 // Wood
-
-
 #define TIME_BLOOM_OPEN 3000 // Open the Bloom for three seconds and then close it
 #define TIME_BLOOM_CYCLE 3000
 #define TIME_BLOOM_CYCLE_SLOW_STEPS 60 // time for each percentage step
 #define TIME_BLOOM_DEMO_CYCLE 2500
 #define TIME_BLOOM_RGB_CYCLE 10
-#define TIME_BLOOM_TRANSITION_FRAME 1000 // milliseconds between updates (ThinkGear)
-//#define TIME_BLOOM_TRANSITION_FRAME 100 // milliseconds between updates (MuseIO)
 
 // Uncomment the line below if using a Common Anode LED
 // such as the "T-1 3/4 5mm Full Color LED" from Radioshack [276-028]:
@@ -83,7 +60,6 @@
 //#define COMMON_ANODE
 
 Servo servoBloom;
-// Servo myservo;
 
 char _command;
 char lastCommand = '0'; // closed
@@ -99,10 +75,6 @@ int index;
 int percentage;
 int degrees;
 
-int colorR = 0;
-int colorG = 0;
-int colorB = 0;
-
 
 // ################################################################
 
@@ -110,35 +82,13 @@ int colorB = 0;
 //SETUP//
 /////////
 
-void setup_bloom() {
-// void setup() {
+void setup() {
 	
 	// Start off with the LED off.
-// 	setColourRgb(0,0,0);
-	setColourRgb(colorR, colorG, colorB);
-	
-	// For BLE Shield or Blend:
-	//   Default pins set to 9 and 8 for REQN and RDYN
-	//   Set your REQN and RDYN here before ble_begin() if you need
-	//
-	// For Blend Micro:
-	//   Default pins set to 6 and 7 for REQN and RDYN
-	//   So, no need to set for Blend Micro.
-	#if ENABLE_BLE
-		ble_set_pins(9, 8);
+	setColourRgb(0,0,0);
 	
 	
-	// Set your BLE Shield name here, max. length 10
-		ble_set_name("Bloom");
-	#endif
-	
-// 	// Init. and start BLE library.
-// 	ble_begin();
-	
-	// Enable serial debug
-	Serial.begin(57600);
-// 	Serial.begin(115200);
-	
+	Serial.begin(115200);
 	
 	servoBloom.attach(SERVO_PIN_BLOOM);
 	
@@ -146,67 +96,14 @@ void setup_bloom() {
 	
 	delay(2000);
 	
-	
 	// White
-	colorR=255;
-	colorG=255;
-	colorB=255;
-// 	setColourRgb(255, 255, 255);
-	setColourRgb(colorR, colorG, colorB);
-	servoTransition(0, POSITION_BLOOM_SETUP);
+	setColourRgb(255, 255, 255);
+	servoTransition(0,POSITION_BLOOM_SETUP);
 	
-		// Init. and start BLE library.
-	#if ENABLE_BLE
-		ble_begin();
-	#endif
-	
-	
-}
+} // setup
 
 
 // ################################################################
-
-// void setup_default()
-void setup()
-{
-  // Default pins set to 9 and 8 for REQN and RDYN
-  // Set your REQN and RDYN here before ble_begin() if you need
-  //ble_set_pins(3, 2);
-  
-  // Set your BLE Shield name here, max. length 10
-  //ble_set_name("My Name");
-  
-  // Init. and start BLE library.
-	#if ENABLE_BLE
-		ble_begin();
-	#endif
-  
-  // Enable serial debug
-  Serial.begin(57600);
-  
-  pinMode(DIGITAL_OUT_PIN, OUTPUT);
-  pinMode(DIGITAL_IN_PIN, INPUT);
-  
-  // Default to internally pull high, change it if you need
-  digitalWrite(DIGITAL_IN_PIN, HIGH);
-  //digitalWrite(DIGITAL_IN_PIN, LOW);
-  
-//   myservo.attach(SERVO_PIN);
-  servoBloom.attach(SERVO_PIN);
-  
-  servoBloom.write(POSITION_BLOOM_CLOSED);
-	
-  delay(2000);
-	
-  // White
-  setColourRgb(255, 255, 255);
-  servoTransition(0,POSITION_BLOOM_SETUP);
-  
-}
-
-
-// ################################################################
-
 
 /////////////
 //MAIN LOOP//
@@ -215,9 +112,7 @@ void setup()
 void loop() {
 	
 	parseSerialInput();
-	#if ENABLE_BLE
-		parseBLE();
-	#endif
+	
 } // Main loop
 
 
@@ -277,260 +172,9 @@ int parseValue() {
 
 // ################################################################
 
-void parseBLE(){
-	
-// 		test_loop();
-	
-	
-	// 	if ( ble_connected() ) {
-	// 		writeMessage();
-	// 		loopRGBServo();
-	// 		
-	// 	}
-	
-	
-	static boolean analog_enabled = false;
-	static byte old_state = LOW;
-	
-	// If data is ready
-	while(ble_available())
-	{
-		// read out command and data
-		byte data0 = ble_read();
-		byte data1 = ble_read();
-		byte data2 = ble_read();
-		
-		#if DEBUG_BLE_PACKETS
-		Serial.write("data0: ");
-		Serial.write(data0);
-		Serial.write("\ndata1: ");
-		Serial.write(data1);
-		Serial.write("\ndata2: ");
-		Serial.write(data2);
-		Serial.write("\n");
-		#endif
-		
-		if (data0 == 0x00)  // Command is to control Servo pin
-		{
-			#if DEBUG_BLE_PACKETS
-			Serial.write("data0 == 0x00\n");
-			#endif
-			bloomClose();
-		}
-		else if (data0 == 0x01)  // Command is to control Servo pin
-		{
-			#if DEBUG_BLE_PACKETS
-			Serial.write("data0 == 0x01\n");
-			#endif
-			bloomOpen();
-		}
-		else if (data0 == 0x03)  // Command is to control Servo pin
-		{
-			#if DEBUG_BLE_PACKETS
-			Serial.write("data0 == 0x03\n");
-			#endif
-			
-// 			if (data1 > 100)
-// 				data1 = 100;
-// 			if (data1 < 0)
-// 				data1 = 0;
-			
-// 			servoBloom.write(data1);
-			servoSetPercentage(data1);
-		}
-		else if (data0 == 0x04)
-		{
-			#if DEBUG_BLE_PACKETS
-			Serial.write("data0 == 0x04\n");
-			#endif
-			analog_enabled = false;
-			servoBloom.write(0);
-		}
-		else if (data0 == 0x05)
-		{
-			#if DEBUG_BLE_PACKETS
-			Serial.write("data0 == 0x05\n");
-			#endif
-			loopRGBServo();
-		}
-		else if (data0 == 0x06)
-		{
-			#if DEBUG_BLE_PACKETS
-			Serial.write("data0 == 0x06\n");
-			#endif
-			loopRGB();
-		}
-		
-		else if (data0 == 0x0A)
-		{
-			if (data1 == 0x00)
-				colorR=int(data2);
-			else if (data1 == 0x01)
-				colorG=int(data2);
-			else if (data1 == 0x02)
-				colorB=int(data2);
-			
-			#if DEBUG_BLE_PACKETS
-			Serial.write("data0 == 0x0A\n");
-			
-			Serial.write("data1 == ");
-			Serial.write(data1);
-			Serial.write("\n");
-			
-			String str;
-			char output[4];
-			
-			str = String(colorR);
-			str.toCharArray(output,4);
-			
-			Serial.write("R: ");
-			Serial.write(output);
-			
-			str = String(colorG);
-			str.toCharArray(output,4);
-			
-			Serial.write("G: ");
-			Serial.write(output);
-			
-			str = String(colorB);
-			str.toCharArray(output,4);
-
-			Serial.write("B: ");
-			Serial.write(output);
-			Serial.write("\n");
-			
-			#endif
-			
-			setColourRgb(colorR, colorG, colorB);
-			
-		}
-		
-	}
-	
-	ble_do_events();
-	
-	// 	if ( ble_available() )
-	// 	{
-	// 		while ( ble_available() )
-	// 		{
-	// 			Serial.write(ble_read());
-	// 		}
-	// 		
-	// 		Serial.println();
-	// 	}
-	// 	
-	// 	delay(1000);
-	
-}
-
-
-// ################################################################
-
-void test_loop()
-{
-	static boolean analog_enabled = false;
-	static byte old_state = LOW;
-	
-	// If data is ready
-	while(ble_available())
-	{
-		// read out command and data
-		byte data0 = ble_read();
-		byte data1 = ble_read();
-		byte data2 = ble_read();
-		
-		//     if (data0 == 0x01)  // Command is to control digital out pin
-		//     {
-		//       if (data1 == 0x01)
-		//         digitalWrite(DIGITAL_OUT_PIN, HIGH);
-		//       else
-		//         digitalWrite(DIGITAL_OUT_PIN, LOW);
-		//     }
-		//     else if (data0 == 0xA0) // Command is to enable analog in reading
-		//     {
-		//       if (data1 == 0x01)
-		//         analog_enabled = true;
-		//       else
-		//         analog_enabled = false;
-		//     }
-		//     else if (data0 == 0x02) // Command is to control PWM pin
-		//     {
-		//       analogWrite(PWM_PIN, data1);
-		//     }
-		//     else if (data0 == 0x03)  // Command is to control Servo pin
-		if (data0 == 0x03)  // Command is to control Servo pin
-		{
-// 			myservo.write(data1);
-			servoBloom.write(data1);
-		}
-		else if (data0 == 0x04)
-		{
-			analog_enabled = false;
-// 			myservo.write(0);
-			servoBloom.write(0);
-			//       analogWrite(PWM_PIN, 0);
-			//       digitalWrite(DIGITAL_OUT_PIN, LOW);
-		}
-	}
-	
-	//   if (analog_enabled)  // if analog reading enabled
-	//   {
-	//     // Read and send out
-	//     uint16_t value = analogRead(ANALOG_IN_PIN); 
-	//     ble_write(0x0B);
-	//     ble_write(value >> 8);
-	//     ble_write(value);
-	//   }
-	//   
-	//   // If digital in changes, report the state
-	//   if (digitalRead(DIGITAL_IN_PIN) != old_state)
-	//   {
-	//     old_state = digitalRead(DIGITAL_IN_PIN);
-	//     
-	//     if (digitalRead(DIGITAL_IN_PIN) == HIGH)
-	//     {
-	//       ble_write(0x0A);
-	//       ble_write(0x01);
-	//       ble_write(0x00);    
-	//     }
-	//     else
-	//     {
-	//       ble_write(0x0A);
-	//       ble_write(0x00);
-	//       ble_write(0x00);
-	//     }
-	//   }
-	
-	//   if (!ble_connected())
-	//   {
-	//     analog_enabled = false;
-	//     digitalWrite(DIGITAL_OUT_PIN, LOW);
-	//   }
-	
-	// Allow BLE Shield to send/receive data
-	ble_do_events();  
-}
-
-
-// ################################################################
-
-void writeMessage() {
-	
-	for (index = 0; index < sizeof(message) - 1; index++) {
-		Serial.print(message[index]);
-		ble_write(message[index]);
-	} 
-	
-	Serial.println();
-	
-}
-
-
-// ################################################################
-
 
 void setDegrees() {
-	
+  
 	#if DEBUG_OUTPUT
 	Serial.println("setDegrees()");
 	#endif
@@ -538,21 +182,21 @@ void setDegrees() {
 	int degrees = parseValue();
 	
 	servoBloom.write(degrees);
-	
+
+  
 }
 
 
 // ################################################################
 
 void setRGB() {
-	
+  
 	#if DEBUG_OUTPUT
 	Serial.println("setRGB()");
 	#endif
-	
+  
 	unsigned int rgbColour[3];
 	
-	// Start off with red.
 	rgbColour[0] = parseValue();
 	rgbColour[1] = parseValue();
 	rgbColour[2] = parseValue();  
@@ -582,16 +226,7 @@ void setColourRgb(unsigned int red, unsigned int green, unsigned int blue) {
 	
 }
 
-// ################################################################
 
-// int BitShiftCombine( unsigned char x_high, unsigned char x_low)
-// {
-//   int combined; 
-//   combined = x_high;              //send x_high to rightmost 8 bits
-//   combined = combined<<8;         //shift x_high over to leftmost 8 bits
-//   combined |= x_low;                 //logical OR keeps x_high intact in combined and fills in                                                             //rightmost 8 bits
-//   return combined;
-// }
 
 // ################################################################
 
@@ -604,7 +239,7 @@ void loopRGB() {
 	rgbColour[2] = 0;  
 	
 	while (1) {
-		
+	
 		// Choose the colours to increment and decrement.
 		for (int decColour = 0; decColour < 3; decColour += 1) {
 			int incColour = decColour == 2 ? 0 : decColour + 1;
@@ -620,13 +255,7 @@ void loopRGB() {
 		}
 		
 		// Quit loop if a new control command has been issued
-// 		if (Serial.available() > 0) { 
-
-		Serial.write("ble_available(): ");
-		Serial.write(ble_available());
-
-// 		if ((Serial.available() > 0) || ( ble_available() > 0)) {  
-		if ((Serial.available() > 0) || ( ble_connected()) ) {  
+		if (Serial.available() > 0) {  
 			break;
 		}
 	}
@@ -637,7 +266,7 @@ void loopRGB() {
 
 void loopRGBServo() {
 	
-	// 	int percentage = 0;
+// 	int percentage = 0;
 	percentage = 0;
 	
 	boolean direction_open = true;
@@ -689,13 +318,8 @@ void loopRGBServo() {
 			}
 		}
 		
-		Serial.write("ble_available(): ");
-		Serial.write(ble_available());
-		
 		// Quit loop if a new control command has been issued
 		if (Serial.available() > 0) {  
-// 		if ((Serial.available() > 0) || ( ble_available() > 0)) {  
-// 		if ((Serial.available() > 0) || ( ble_connected()) ) {  
 			break;
 		}
 		
@@ -708,23 +332,18 @@ void loopRGBServo() {
 
 void servoSetPercentage(int new_percent) {
 	
-	// 	#if DEBUG_OUTPUT
-	// 		Serial.println("servoSetPercentage()");
-	// 	#endif
+// 	#if DEBUG_OUTPUT
+// 		Serial.println("servoSetPercentage()");
+// 	#endif
 	
 	//  int percent = parseValue();
 	
-	// 	#if DEBUG_OUTPUT
-	// 		Serial.print("--> Percentage: ");
-	// 		Serial.println(percent);
-	// 	#endif
+// 	#if DEBUG_OUTPUT
+// 		Serial.print("--> Percentage: ");
+// 		Serial.println(percent);
+// 	#endif
 	
-	if (new_percent > 100)
-		new_percent = 100;
-	else if (new_percent < 0)
-		new_percent = 0;
-	
-	// 	int degrees = POSITION_BLOOM_CLOSED;
+// 	int degrees = POSITION_BLOOM_CLOSED;
 	degrees = POSITION_BLOOM_CLOSED;
 	
 	// convert percentage to servo degrees
@@ -734,10 +353,10 @@ void servoSetPercentage(int new_percent) {
 		degrees = (new_percent * (POSITION_BLOOM_OPEN - POSITION_BLOOM_CLOSED) / 100) + POSITION_BLOOM_CLOSED;
 	}
 	
-	// 	#if DEBUG_OUTPUT
-	// 		Serial.print("--> Position: ");
-	// 		Serial.println(degrees);
-	// 	#endif
+// 	#if DEBUG_OUTPUT
+// 		Serial.print("--> Position: ");
+// 		Serial.println(degrees);
+// 	#endif
 	
 	servoBloom.write(degrees);
 	
@@ -824,9 +443,9 @@ void bloomCycleSlow() {
 	Serial.println("bloomCycleSlow()");
 	#endif
 	
-	// 	int degrees = POSITION_BLOOM_CLOSED;
+// 	int degrees = POSITION_BLOOM_CLOSED;
 	degrees = POSITION_BLOOM_CLOSED;
-	// 	int percentage = 0;
+// 	int percentage = 0;
 	percentage = 0;
 	
 	while (1) {
@@ -868,17 +487,13 @@ void bloomCycleSlow() {
 void servoTransition(int start_percentage, int end_percentage) {
 	
 	
-	// 	int degrees = POSITION_BLOOM_CLOSED;
+// 	int degrees = POSITION_BLOOM_CLOSED;
 	degrees = POSITION_BLOOM_CLOSED;
-	// 	int percentage = 0;
+// 	int percentage = 0;
 	percentage = 0;
-	
-	int slice = TIME_BLOOM_CYCLE_SLOW_STEPS;
 	
 	
 	if (start_percentage < end_percentage) {
-		
-		slice = TIME_BLOOM_TRANSITION_FRAME / (end_percentage - start_percentage);
 		
 		for (percentage=start_percentage;percentage<=end_percentage;percentage++) {
 			
@@ -890,8 +505,7 @@ void servoTransition(int start_percentage, int end_percentage) {
 			}
 			
 			servoBloom.write(degrees);
-// 			delay(TIME_BLOOM_CYCLE_SLOW_STEPS);
-			delay(slice);
+			delay(TIME_BLOOM_CYCLE_SLOW_STEPS);
 			
 		}
 	}
@@ -902,8 +516,6 @@ void servoTransition(int start_percentage, int end_percentage) {
 		
 		for (percentage=start_percentage;percentage>=end_percentage;percentage--) {
 			
-			slice = TIME_BLOOM_TRANSITION_FRAME / (start_percentage - end_percentage);
-			
 			// convert percentage to servo degrees
 			if (POSITION_BLOOM_CLOSED >= POSITION_BLOOM_OPEN) {
 				degrees = POSITION_BLOOM_CLOSED - (percentage * (POSITION_BLOOM_CLOSED - POSITION_BLOOM_OPEN) / 100);
@@ -912,12 +524,10 @@ void servoTransition(int start_percentage, int end_percentage) {
 			}
 			
 			servoBloom.write(degrees);
-// 			delay(TIME_BLOOM_CYCLE_SLOW_STEPS);
-			delay(slice);
+			delay(TIME_BLOOM_CYCLE_SLOW_STEPS);
 			
 		}
-		
-		
+	
 	}
 	
 }
@@ -1048,70 +658,9 @@ void rgbTransition(unsigned int start_red, unsigned int start_green, unsigned in
 
 // ################################################################
 
-void loopDemoSocial() {
-	
-	#if DEBUG_OUTPUT
-	Serial.println("loopDemoSocial()");
-	#endif
-	
-	// 	int percentage = 0;
-	percentage = 0;
-	
-	while (1) {
-		
-		// Red
-		setColourRgb(255, 0, 0);
-		//  servoSetPercentage(80);
-		servoTransition(0,80);
-		
-		
-		delay(TIME_BLOOM_DEMO_CYCLE);
-		
-		// Green
-		setColourRgb(0, 255, 0);
-		//  servoSetPercentage(30);
-		servoTransition(80,40);
-		
-		
-		
-		delay(TIME_BLOOM_DEMO_CYCLE);
-		
-		// Blue
-		setColourRgb(0, 0, 255);
-		//  servoSetPercentage(100);
-		servoTransition(40,100);
-		
-		delay(TIME_BLOOM_DEMO_CYCLE);
-		
-		
-		// Cyan
-		setColourRgb(0, 255, 255);
-		//  servoSetPercentage(50);
-		servoTransition(100,50);
-		
-		delay(TIME_BLOOM_DEMO_CYCLE);
-		
-		// White
-		setColourRgb(255, 255, 255);
-		servoTransition(50,0);
-		
-		
-		if (Serial.available() > 0) {
-			
-			break;
-			
-		}
-		
-	}
-	
-}
-
-
-// ################################################################
-
 void parseCommand(char command) {
 	
-	// 	int percentage = 0;
+// 	int percentage = 0;
 	percentage = 0;
 	
 	switch (command) {
@@ -1129,11 +678,10 @@ void parseCommand(char command) {
 		case 'S':  percentage = parseValue(); servoSetPercentage(percentage); break;
 		case 'T':  rgbTransitionManual(); break;
 		
-		case 'D':  loopDemoSocial(); break;
-		
 	}
 }
 
 
 // ################################################################
 // ################################################################
+
