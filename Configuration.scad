@@ -121,6 +121,9 @@ socket_rim = socket_outer_diameter - 15.2; // (calculated)
 
 
 // Base Stand
+stand_crop_microusb_slot = true;
+stand_crop_dc_adapter_slot = true;
+
 build_base_socket = true;
 // build_base_socket = false;
 

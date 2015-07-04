@@ -97,20 +97,23 @@ module build_stand_extruded_exterior(){
 		rotate(microcontroller_rotate_position) {
 			
 			// MicroUSB
-			rotate([0,0,-4]) // slightly left
-			translate([-0.75,0,20])
-			rotate([0,0,150])
-			microcontroller_microusb_petal_crop(petal_scale=0.116); // slight decrease to fit tighters to cables
-			
+			if (stand_crop_microusb_slot) {
+				rotate([0,0,-4]) // slightly left
+				translate([-0.75,0,20])
+				rotate([0,0,150])
+				microcontroller_microusb_petal_crop(petal_scale=0.116); // slight decrease to fit tighters to cables
+			}
 			
 			// DC Adapter
-			rotate([0,0,-1.5])
-			// 			translate([-4.5,0,-11])
-			translate([-4.5,0,-11+1])
-			rotate([0,0,150])
-			microcontroller_microusb_petal_crop(petal_scale=0.100); // increased for 9V battery pack
-			// 			microcontroller_microusb_petal_crop(petal_scale=0.09);
-			// 			microcontroller_microusb_petal_crop(petal_scale=0.08);
+			if (stand_crop_dc_adapter_slot) {
+				rotate([0,0,-1.5])
+				// 			translate([-4.5,0,-11])
+				translate([-4.5,0,-11+1])
+				rotate([0,0,150])
+				microcontroller_microusb_petal_crop(petal_scale=0.100); // increased for 9V battery pack
+				// 			microcontroller_microusb_petal_crop(petal_scale=0.09);
+				// 			microcontroller_microusb_petal_crop(petal_scale=0.08);
+			}
 			
 		}
 		
