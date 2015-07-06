@@ -183,9 +183,11 @@ module build_stand_extruded_interior() {
 		
 		
 		// Slice microcontroller mounting board down the middle to save material
-		rotate([0,0,-90+microcontroller_rotate_position])
-		translate([25-10-10-1.5,7.5+15,(microcontroller_width/2)])
-		cube([(microcontroller_height/2)+5+5+5+10+7.5, 10, microcontroller_width+20+1], center=true);
+		if (stand_crop_microcontroller_mount) {
+			rotate([0,0,-90+microcontroller_rotate_position])
+			translate([25-10-10-1.5,7.5+15,(microcontroller_width/2)])
+			cube([(microcontroller_height/2)+5+5+5+10+7.5, 10, microcontroller_width+20+1], center=true);
+		}
 		
 		
 		translate([25,-24,62.9])
