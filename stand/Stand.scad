@@ -153,7 +153,8 @@ module build_stand_extruded_interior() {
 			microcontroller_mount();
 			
 			// Lid mount (bottom of object)
-			render_lid_mount();
+			if (stand_render_lid_mount)
+				render_lid_mount();
 			
 			// Connect Mount plate to back wall of Stand
 			color([1,1,1])

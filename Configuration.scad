@@ -127,6 +127,8 @@ stand_crop_dc_adapter_slot = true;
 stand_crop_microcontroller_mount = true;
 // stand_crop_microcontroller_mount = false;
 
+stand_render_lid_mount = true;
+
 build_base_socket = true;
 // build_base_socket = false;
 
