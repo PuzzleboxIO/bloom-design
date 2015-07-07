@@ -236,8 +236,8 @@ module extrude_bottom(){
 
 module bottom_clip_screw_crop(){
 	
-	echo("bottom_clip_screw_clearance_diameter", bottom_clip_screw_clearance_diameter);
-	echo("bottom_clip_screw_clearance_taper", bottom_clip_screw_clearance_taper);
+// 	echo("bottom_clip_screw_clearance_diameter", bottom_clip_screw_clearance_diameter);
+// 	echo("bottom_clip_screw_clearance_taper", bottom_clip_screw_clearance_taper);
 	
 	translate(bottom_plate_clip_screw_offset)
 	
