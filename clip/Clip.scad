@@ -23,6 +23,7 @@ module assemble_clip() {
 
 module lid_mount_clip(){
 	
+	translate(bottom_plate_clip_screw_offset)
 	
 	translate([lid_mount_bolt_spacer,0,lid_mount_bolt_spacer])
 	
@@ -72,6 +73,8 @@ module lid_mount_clip(){
 
 
 module lid_mount_alignment_screw(){
+	
+	translate(bottom_plate_clip_screw_offset)
 	
 	translate([-15,0,-10])
 	

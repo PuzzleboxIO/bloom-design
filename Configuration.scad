@@ -374,7 +374,6 @@ lid_mount_screw_diameter = 4 + mount_screw_tolerance;
 lid_mount_bolt_spacer = 3.75; // bolt and washer(s) between clip and mount
 
 
-
 // Clip
 clip_mount_screw_diameter = 3.85;
 // bottom_clip_screw_clearance = 20;
@@ -391,6 +390,8 @@ bottom_plate_height = 3.6;
 bottom_plate_solid_height = 2.4;
 // bottom_plate_inside_height = 2;
 bottom_plate_inside_height = 1.5;
+
+bottom_plate_clip_screw_offset = [0,0,0];
 
 
 // Cover

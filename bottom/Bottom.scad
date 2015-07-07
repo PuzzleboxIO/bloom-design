@@ -97,6 +97,9 @@ module assemble_bottom() {
 				}
 				
 				// Area around mount screw
+				
+				translate(bottom_plate_clip_screw_offset)
+				
 				translate([-16.5,-6,1])
 				cylinder(h=2,d=15,center=true);
 				
@@ -152,9 +155,6 @@ module assemble_bottom() {
 		
 		
 	} // upper inside
-	
-	
-	
 	
 	
 	// 	lid_mount_alignment_screw();
@@ -239,6 +239,8 @@ module bottom_clip_screw_crop(){
 	echo("bottom_clip_screw_clearance_diameter", bottom_clip_screw_clearance_diameter);
 	echo("bottom_clip_screw_clearance_taper", bottom_clip_screw_clearance_taper);
 	
+	translate(bottom_plate_clip_screw_offset)
+	
 	translate([-14,-5,bottom_plate_solid_height/2])
 	cylinder(h=bottom_plate_solid_height+0.5, d1=bottom_clip_screw_clearance_diameter, d2=bottom_clip_screw_clearance_taper, center=true);
 	
@@ -247,6 +249,8 @@ module bottom_clip_screw_crop(){
 
 
 module upper_clip_screw_crop(){
+	
+	translate(bottom_plate_clip_screw_offset)
 	
 	translate([-15,0,-10])
 	
@@ -258,6 +262,3 @@ module upper_clip_screw_crop(){
 	
 	
 }
-
-
-
