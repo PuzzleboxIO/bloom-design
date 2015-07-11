@@ -396,6 +396,9 @@ bottom_plate_inside_height = 1.5;
 bottom_plate_clip_screw_offset = [0,0,0];
 bottom_plate_clip_screw_reinforcement_cylinder_offset = [0,0,0];
 
+bottom_plate_rear_left_screw_offset = [0,0,0];
+bottom_plate_rear_left_screw_reinforcement_cylinder_offset = [0,0,0];
+
 
 // Cover
 cover_screw_diameter = 3.8 + 0.2; // (0.2mm tolerance added to exact measurement)

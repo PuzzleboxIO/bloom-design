@@ -340,6 +340,7 @@ module microcontroller_microusb_crop(){
 	
 }
 
+
 module microcontroller_microusb_petal_crop(petal_scale=0.15){
 	
 	rotate([0,0,106.5])
@@ -913,7 +914,6 @@ module build_stand_cylinder() {
 
 
 module render_servo_mount() {
-	
 	translate([base_servo_mount_offset_x,base_servo_mount_offset_y,base_servo_mount_offset_z])
 	union(){
 		bottom_servo_mount();
@@ -924,6 +924,7 @@ module render_servo_mount() {
 
 
 module servo_cube(){
+
 	translate([0,-10,servo_cube_z/2])
 	difference(){
 		cube([servo_cube_x,servo_cube_y,servo_cube_z], center=true);
