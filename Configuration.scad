@@ -124,6 +124,8 @@ socket_rim = socket_outer_diameter - 15.2; // (calculated)
 stand_crop_microusb_slot = true;
 stand_crop_dc_adapter_slot = true;
 
+stand_render_microcontroller_mount = true;
+
 stand_crop_microcontroller_mount = true;
 // stand_crop_microcontroller_mount = false;
 
@@ -392,6 +394,7 @@ bottom_plate_solid_height = 2.4;
 bottom_plate_inside_height = 1.5;
 
 bottom_plate_clip_screw_offset = [0,0,0];
+bottom_plate_clip_screw_reinforcement_cylinder_offset = [0,0,0];
 
 
 // Cover
