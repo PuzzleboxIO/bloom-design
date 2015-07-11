@@ -131,6 +131,34 @@ module build_stand_extruded_interior() {
 			render_servo_mount();
 			
 			// Microcontroller mount
+			if (stand_render_microcontroller_mount)
+				render_microcontroller_mount();
+			
+			
+			// Lid mount (bottom of object)
+			if (stand_render_lid_mount)
+				render_lid_mount();
+			
+			
+		}
+		
+		
+		// crop external surface
+		extrude_base_crop();
+		
+		base_floor_crop();
+		
+		
+	}
+	
+}
+
+
+module render_microcontroller_mount() {
+
+	difference(){
+		union() {
+			// Microcontroller mount
 			rotate(microcontroller_rotate_position)
 			translate([-microcontroller_mount_x_offset,-microcontroller_mount_y_offset,-microcontroller_mount_z_offset])
 			rotate([0,-90,0])
@@ -142,7 +170,7 @@ module build_stand_extruded_interior() {
 			mount_tapped_stand(r = mountingHoleRadius + microcontroller_mounting_hole_radius_adjustment);
 			
 			
-			rotate(microcontroller_rotate_position)			
+			rotate(microcontroller_rotate_position)
 			scale([1.05,1.05,1.05])
 			translate([0,0,12])
 			rotate([180,0,0])
@@ -151,10 +179,7 @@ module build_stand_extruded_interior() {
 			translate([0,3,0])
 			scale([1,0.85,1])
 			microcontroller_mount();
-			
-			// Lid mount (bottom of object)
-			if (stand_render_lid_mount)
-				render_lid_mount();
+
 			
 			// Connect Mount plate to back wall of Stand
 			color([1,1,1])
@@ -167,9 +192,7 @@ module build_stand_extruded_interior() {
 			rotate([0,0,-90+microcontroller_rotate_position])
 			translate([3.5-40,22.5+1.9,(microcontroller_width/2)-5.1])
 			cube([(microcontroller_height/2)+32.5, pcbHeight, microcontroller_width+21], center=true);
-			
 		}
-		
 		
 		// Crop mounting holes
 		rotate(microcontroller_rotate_position)
@@ -189,20 +212,25 @@ module build_stand_extruded_interior() {
 			translate([25-10-10-1.5,7.5+15,(microcontroller_width/2)])
 			cube([(microcontroller_height/2)+5+5+5+10+7.5, 10, microcontroller_width+20+1], center=true);
 		}
-		
-		
-		translate([25,-24,62.9])
-		cube([10,10,5],center=true);
-		
-		
-		// crop external surface
-		extrude_base_crop();
-		
-		base_floor_crop();
-		
-		
 	}
+
+}
+
+
+module render_microcontroller_mount_rear(){
 	
+	difference(){
+		
+		render_microcontroller_mount();
+		
+		rotate([0,0,-90+microcontroller_rotate_position])
+		translate([3.5-40,20+2.5,(microcontroller_width/2)-5])
+		cube([(microcontroller_height/2)+32.5+15, 10, microcontroller_width+25], center=true);
+		
+		extrude_base_crop();
+	
+	}
+
 }
 
 
@@ -663,10 +691,10 @@ module import_servo(){
 
 
 module bottom_servo_mount(){
+	
 	translate([0,-27.5,-31.5])
 	rotate([0,90,0])
 	rotate([0,0,90])
-	
 	
 	difference(){
 		
@@ -678,8 +706,8 @@ module bottom_servo_mount(){
 			translate([-5,0,((servo_depth-servo_top_piece_height)/2+10)/2])
 			cube([((servo_depth-servo_top_piece_height)/2)+10, (rim_size/2)+10, servo_width], center=true);
 			
-			translate([-20,5,0])
-			cube([servo_depth-servo_top_piece_height,rim_size,servo_width+0.2],center=true);
+// 			translate([-20,5,0])
+// 			cube([servo_depth-servo_top_piece_height,rim_size,servo_width+0.2],center=true);
 			
 		}
 		
@@ -687,10 +715,10 @@ module bottom_servo_mount(){
 		mount_screws(h=mount_screw_depth+2, d=cage_screw_diameter * print_scale);
 		
 		
-		color([0,1,0])
-		translate([base_servo_mount_crop_from_back,0,0])
-		translate([-12.5,-21.5,8])
-		cube([10,10,20], center=true);
+// 		color([0,1,0])
+// 		translate([base_servo_mount_crop_from_back,0,0])
+// 		translate([-12.5,-21.5,8])
+// 		cube([10,10,20], center=true);
 		
 	}
 	
