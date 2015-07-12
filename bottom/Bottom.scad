@@ -249,11 +249,19 @@ module bottom_clip_screw_crop(){
 // 	echo("bottom_clip_screw_clearance_diameter", bottom_clip_screw_clearance_diameter);
 // 	echo("bottom_clip_screw_clearance_taper", bottom_clip_screw_clearance_taper);
 	
-	translate(bottom_plate_clip_screw_offset)
+	translate(bottom_plate_rear_right_screw_offset)
 	translate([-14,-5,bottom_plate_solid_height/2])
 	cylinder(h=bottom_plate_solid_height+0.5, d1=bottom_clip_screw_clearance_diameter, d2=bottom_clip_screw_clearance_taper, center=true);
 	
 	translate(bottom_plate_rear_left_screw_offset)
+	translate([-14,-5,bottom_plate_solid_height/2])
+	cylinder(h=bottom_plate_solid_height+0.5, d1=bottom_clip_screw_clearance_diameter, d2=bottom_clip_screw_clearance_taper, center=true);
+	
+	translate(bottom_plate_front_right_screw_offset)
+	translate([-14,-5,bottom_plate_solid_height/2])
+	cylinder(h=bottom_plate_solid_height+0.5, d1=bottom_clip_screw_clearance_diameter, d2=bottom_clip_screw_clearance_taper, center=true);
+	
+	translate(bottom_plate_front_left_screw_offset)
 	translate([-14,-5,bottom_plate_solid_height/2])
 	cylinder(h=bottom_plate_solid_height+0.5, d1=bottom_clip_screw_clearance_diameter, d2=bottom_clip_screw_clearance_taper, center=true);
 	
@@ -263,7 +271,7 @@ module bottom_clip_screw_crop(){
 
 module upper_clip_screw_crop(){
 	
-	translate(bottom_plate_clip_screw_offset)
+	translate(bottom_plate_rear_right_screw_offset)
 	translate([-15,0,-10])
 	translate([lid_mount_bolt_spacer,0,lid_mount_bolt_spacer])
 	translate([-10,-5,4])
@@ -276,7 +284,20 @@ module upper_clip_screw_crop(){
 	translate([lid_mount_bolt_spacer,0,lid_mount_bolt_spacer])
 	translate([-10,-5,4])
 	translate([7.5,0,0])
-	// 	cylinder(h=25, d=lid_mount_screw_diameter+0.2, center=true);
+		cylinder(h=25, d=lid_mount_screw_diameter+0.25, center=true);
+	
+	translate(bottom_plate_front_right_screw_offset)
+	translate([-15,0,-10])
+	translate([lid_mount_bolt_spacer,0,lid_mount_bolt_spacer])
+	translate([-10,-5,4])
+	translate([7.5,0,0])
+		cylinder(h=25, d=lid_mount_screw_diameter+0.25, center=true);
+	
+	translate(bottom_plate_front_left_screw_offset)
+	translate([-15,0,-10])
+	translate([lid_mount_bolt_spacer,0,lid_mount_bolt_spacer])
+	translate([-10,-5,4])
+	translate([7.5,0,0])
 		cylinder(h=25, d=lid_mount_screw_diameter+0.25, center=true);
 	
 }
@@ -285,16 +306,27 @@ module upper_clip_screw_crop(){
 module mount_screw_reinforcement(){
 	
 	// Cylinder reinforcement area around mount screw
-	translate(bottom_plate_clip_screw_offset)
-	translate(bottom_plate_clip_screw_reinforcement_cylinder_offset)
+	translate(bottom_plate_rear_right_screw_offset)
+	translate(bottom_plate_rear_right_screw_reinforcement_cylinder_offset)
 	translate([-16.5,-6,1])
 	cylinder(h=2,d=15,center=true);
-	
 	
 	// Cylinder reinforcement area around mount screw
 	translate(bottom_plate_rear_left_screw_offset)
 	translate(bottom_plate_rear_left_screw_reinforcement_cylinder_offset)
 	translate([-16.5,-6,1])
 	cylinder(h=2,d=15-1,center=true);
+	
+	// Cylinder reinforcement area around mount screw
+	translate(bottom_plate_front_right_screw_offset)
+	translate(bottom_plate_front_right_screw_reinforcement_cylinder_offset)
+	translate([-16.5,-6,1])
+	cylinder(h=2,d=15,center=true);
+	
+	// Cylinder reinforcement area around mount screw
+	translate(bottom_plate_front_left_screw_offset)
+	translate(bottom_plate_front_left_screw_reinforcement_cylinder_offset)
+	translate([-16.5,-6,1])
+	cylinder(h=2,d=15,center=true);
 	
 }

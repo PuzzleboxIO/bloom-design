@@ -393,11 +393,17 @@ bottom_plate_solid_height = 2.4;
 // bottom_plate_inside_height = 2;
 bottom_plate_inside_height = 1.5;
 
-bottom_plate_clip_screw_offset = [0,0,0];
-bottom_plate_clip_screw_reinforcement_cylinder_offset = [0,0,0];
+bottom_plate_rear_right_screw_offset = [0,0,0];
+bottom_plate_rear_right_screw_reinforcement_cylinder_offset = [0,0,0];
 
 bottom_plate_rear_left_screw_offset = [0,0,0];
 bottom_plate_rear_left_screw_reinforcement_cylinder_offset = [0,0,0];
+
+bottom_plate_front_right_screw_offset = [0,0,0];
+bottom_plate_front_right_screw_reinforcement_cylinder_offset = [0,0,0];
+
+bottom_plate_front_left_screw_offset = [0,0,0];
+bottom_plate_front_left_screw_reinforcement_cylinder_offset = [0,0,0];
 
 bottom_render_upper_inside = true;
 // bottom_render_upper_inside = false;
