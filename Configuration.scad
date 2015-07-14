@@ -408,6 +408,8 @@ bottom_plate_front_left_screw_reinforcement_cylinder_offset = [0,0,0];
 bottom_render_upper_inside = true;
 // bottom_render_upper_inside = false;
 
+bottom_plate_screw_height = 12;
+
 
 // Cover
 cover_screw_diameter = 3.8 + 0.2; // (0.2mm tolerance added to exact measurement)
