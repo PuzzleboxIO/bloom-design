@@ -713,7 +713,7 @@ module bottom_servo_mount(){
 		}
 		
 		translate([0,base_servo_mount_screws_offset_z,0])
-		mount_screws(h=mount_screw_depth+2, d=cage_screw_diameter * print_scale);
+			mount_screws(h=mount_screw_depth+2, d=cage_screw_diameter * print_scale);
 		
 		
 // 		color([0,1,0])
@@ -728,26 +728,45 @@ module bottom_servo_mount(){
 
 module bottom_servo_mount_reinforcement(){
 	
-	translate([-10.6,-32.68,-mount_plate_length+(5/2)])
-	rotate([0,0,45])
-	cube([40,10,5],center=true);
 	
-	translate([-10.6,-32.68,-mount_plate_length+(5/2)])
-	rotate([0,0,45])
-	translate([-20-2,-10-5,0])
-	cube([40,20,5],center=true);
+	difference(){
+		union(){
+			
+			// front right
+		// 	translate([-10.6,-32.68,-mount_plate_length+(5/2)])
+		// 	rotate([0,0,45])
+		// 		cube([40,10,5],center=true);
+			translate([-8.9,-34.5,-mount_plate_length+(5/2)])
+			rotate([0,0,45])
+				cube([40,15,5],center=true);
+			
+		// 	translate([-10.6,-32.68,-mount_plate_length+(5/2)])
+		// 	rotate([0,0,45])
+		// 	translate([-20-2,-10-5,0])
+		// 		cube([40,20,5],center=true);
+			translate([-8.9,-50,-mount_plate_length+(5/2)])
+			rotate([0,0,45])
+				cube([40,15,5],center=true);
+			
+			// front left
+			translate([36.5,-32.68,-mount_plate_length+(5/2)-0.375])
+			rotate([0,0,-45])
+				cube([40,10,4.25],center=true);
+			
+			translate([36.5,-32.68,-mount_plate_length+(5/2)])
+			rotate([0,0,-45])
+			translate([25,0,0])
+			cube([40,30,5],center=true);
+		
+		}
+		
+		translate([0,-27.5,-31.5])
+		rotate([0,90,0])
+		rotate([0,0,90])
+		translate([0,base_servo_mount_screws_offset_z,0])
+			mount_screws(h=mount_screw_depth+2, d=cage_screw_diameter * print_scale);
 	
-	
-	// 	translate([36.5,-32.68,-mount_plate_length+(5/2)])
-	translate([36.5,-32.68,-mount_plate_length+(5/2)-0.375])
-	rotate([0,0,-45])
-	// 	cube([40,10,5],center=true);
-	cube([40,10,4.25],center=true);
-	
-	translate([36.5,-32.68,-mount_plate_length+(5/2)])
-	rotate([0,0,-45])
-	translate([25,0,0])
-	cube([40,30,5],center=true);
+	}
 	
 }
 
