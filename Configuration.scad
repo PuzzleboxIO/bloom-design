@@ -401,6 +401,8 @@ bottom_plate_rear_left_screw_reinforcement_cylinder_offset = [0,0,0];
 
 bottom_plate_front_right_screw_offset = [0,0,0];
 bottom_plate_front_right_screw_reinforcement_cylinder_offset = [0,0,0];
+// bottom_plate_rear_right_screw_offset = [-3,-23,0];
+// bottom_plate_rear_right_screw_reinforcement_cylinder_offset = [-1,-5,0];
 
 bottom_plate_front_left_screw_offset = [0,0,0];
 bottom_plate_front_left_screw_reinforcement_cylinder_offset = [0,0,0];
