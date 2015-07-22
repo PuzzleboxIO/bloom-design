@@ -780,13 +780,13 @@ module servo_mount_crop(){
 	
 	translate([10,-32.68,-mount_plate_length+(10/2)+5+2.5+3.4375])
 	rotate([15,0,0])
-	cube([40,40,10],center=true);
+		cube([40,40,10],center=true);
 	
 	translate([0,-27.5,-31.5])
 	rotate([0,90,0])
 	rotate([0,0,90])
 	translate([wires_crop_x_offset-5, -wires_crop_y_offset, (wires_crop_height/2) + (servo_mount_plate_thickness) + 0.01])
-	cube([wires_crop_width+10, wires_crop_length+1, wires_crop_height], center=true);
+		cube([wires_crop_width+10, wires_crop_length+1, wires_crop_height], center=true);
 	
 }
 
@@ -807,7 +807,7 @@ module socket_rim(){
 		translate([0,0,stand_height+bulb_socket_height])
 		scale([print_scale, print_scale, print_scale])
 		rotate([0,0,-30])
-		screw_holes();
+			screw_holes();
 		
 	}
 }
