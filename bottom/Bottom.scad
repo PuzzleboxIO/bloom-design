@@ -41,8 +41,10 @@ module assemble_bottom() {
 		extrude_bottom();
 		
 		// 	translate([0,0,-bottom_plate_height])
-		translate([0,0,-0.1])
-		bottom_clip_screw_crop();
+		if (bottom_plate_crop_screw_mounts) {
+			translate([0,0,-0.1])
+			bottom_clip_screw_crop();
+		}
 		
 		// Slice up bottom using upper_inside cutout scaled down
 		// 		translate([0,0,-4.5+bottom_plate_height])
@@ -112,8 +114,8 @@ module assemble_bottom() {
 			
 		}
 		
-		
-		upper_clip_screw_crop();
+		if (bottom_plate_crop_screw_mounts)
+			upper_clip_screw_crop();
 		
 		
 		// Crop edges of interior pieces to make room after scaling
@@ -162,7 +164,8 @@ module assemble_bottom() {
 			scale([0.825,0.825,1])
 				mount_screw_reinforcement();
 				
-			upper_clip_screw_crop();
+			if (bottom_plate_crop_screw_mounts) 
+				upper_clip_screw_crop();
 		}
 	
 	}
@@ -205,7 +208,8 @@ module extrude_bottom(){
 		// 						font="braille.dxf");
 		
 		// 		lid_mount_alignment_screw();
-		upper_clip_screw_crop();
+		if (bottom_plate_crop_screw_mounts)
+			upper_clip_screw_crop();
 		
 	}
 	

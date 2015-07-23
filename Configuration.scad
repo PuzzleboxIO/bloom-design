@@ -393,6 +393,9 @@ bottom_plate_solid_height = 2.4;
 // bottom_plate_inside_height = 2;
 bottom_plate_inside_height = 1.5;
 
+bottom_plate_crop_screw_mounts = true;
+// bottom_plate_crop_screw_mounts = false;
+
 bottom_plate_rear_right_screw_offset = [0,0,0];
 bottom_plate_rear_right_screw_reinforcement_cylinder_offset = [0,0,0];
 
