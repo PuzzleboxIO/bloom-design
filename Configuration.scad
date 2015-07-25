@@ -380,9 +380,11 @@ lid_mount_bolt_spacer = 3.75; // bolt and washer(s) between clip and mount
 clip_mount_screw_diameter = 3.85;
 // bottom_clip_screw_clearance = 20;
 bottom_clip_screw_bolt = 6.85;
-bottom_clip_screw_clearance = 3.15; //10mm
+// bottom_clip_screw_clearance = 3.15; //10mm
+bottom_clip_screw_clearance = 5;
 bottom_clip_screw_clearance_diameter = bottom_clip_screw_bolt + bottom_clip_screw_clearance;
-bottom_clip_screw_clearance_taper = bottom_clip_screw_clearance_diameter - 2;
+// bottom_clip_screw_clearance_taper = bottom_clip_screw_clearance_diameter - 2;
+bottom_clip_screw_clearance_taper = bottom_clip_screw_clearance_diameter - 2 - (5-3.15);
 
 
 // Bottom Plate
