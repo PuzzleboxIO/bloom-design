@@ -168,6 +168,7 @@ stand_crop_z = 172;
 
 // rotate_screw_holes = [0,0,0]; // 2 holes on forward half, to either side
 rotate_screw_holes = [0,0,180]; // 1 hole on forward half, centered
+rotate_socket_screw_holes_offset = [0,0,0];
 
 // slice_socket_up_from_bottom = 22.5;
 slice_socket_up_from_bottom = 22.5-10;
