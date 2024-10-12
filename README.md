@@ -3,10 +3,12 @@ bloom-design
 
 Puzzlebox Bloom - 3D Design
 
-
 by Puzzlebox Productions, LLC
 http://puzzlebox.io/bloom
 
+![puzzlebox_bloom_openscad](https://github.com/user-attachments/assets/d22795ca-555e-4ec8-a805-dd73b5de49f9)
+
+[![Watch the video](https://img.youtube.com/vi/KhwO3Cl5jvA/0.jpg)](https://www.youtube.com/watch?v=KhwO3Cl5jvA)
 
 Assembly Guide:
 https://puzzlebox.io/bloom-assembly/
